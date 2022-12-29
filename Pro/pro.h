@@ -18,7 +18,7 @@ class Pro: public Contact
     void Setaddmail(string ad){this->addmail=ad;}
     string Getaddmail(){return this->addmail;}
 
-    void affiche() override;
+    string affiche() override;
 
     private:
         string nomEntreprise;

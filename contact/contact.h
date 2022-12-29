@@ -5,47 +5,44 @@
 #include <string>
 #include <sstream>
 
-
-// OPERATOR << OVERLOAD
-/*std::ostream& operator<<(ostream& sortie, Contact& contact){
-
-} */
-
+using namespace std;
 
 // STRUCT ADRESSE
 struct Adresse{
     int numero;
-    std::string rue;
-    std::string complement;
+    string rue;
+    string complement;
     int codePostal;
-    std::string ville;
+    string ville;
 
-    std::string affiche(){
-        std::ostringstream oss;
-        std::cout << "L'adresse est la suivante: " <<
+        string affiche(){
+        ostringstream oss;
+        cout << "L'adresse est la suivante: " <<
                   "Num:"<< numero << "---" <<
                   "Rue:"<< rue << "---"  <<
                   "Cplt:"<< complement << "---" <<
                   "CP:"<< codePostal << "---" <<
                   "Ville:"<< ville << "---"
-                  << std::endl;
+                  << endl;
         return oss.str();
     }
     Adresse(){};
-    Adresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
+    Adresse(int numero,string rue,string complement,int codePostal,string ville){
         this->numero = numero;
         this->rue = rue;
         this->complement = complement;
         this->codePostal = codePostal;
         this->ville = ville;
     }
-    void SetAdresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
+    void SetAdresse(int numero,string rue,string complement,int codePostal,string ville){
         this->numero = numero;
         this->rue = rue;
         this->complement = complement;
         this->codePostal = codePostal;
         this->ville = ville;
     }
+
+
 
 };
 
@@ -57,34 +54,34 @@ class Contact {
 
     private:
         int identifiant;
-        std::string nom;
-        std::string prenom;
+        string nom;
+        string prenom;
         char sexe;
         Adresse adresse;
 
     public:
-        Contact(int=0,std::string="",std::string="",char=' ',Adresse=Adresse());
+        Contact(int=0,string="",string="",char=' ',Adresse=Adresse());
         virtual ~Contact();
 
         // ----------- SETTERS ---------- //
         void SetIdentifiant(int ID){ this->identifiant = ID;}
-        void SetNom(std::string nom){ this->nom=nom;} // FAIRE FULL MAJUSCULE
-        void SetPrenom(std::string prenom){ this->prenom = prenom;} // FAIRE FIRST MAJUSCULE
+        void SetNom(string nom){ this->nom=nom;} // FAIRE FULL MAJUSCULE
+        void SetPrenom(string prenom){ this->prenom = prenom;} // FAIRE FIRST MAJUSCULE
         void SetSexe(char sexe){ this->sexe = sexe;}
 
 
         // ----------- GETTERS ---------- //
         int GetIdentifiant(){return this->identifiant;}
-        std::string GetNom(){return this->nom;}
-        std::string GetPrenom(){return this->prenom;}
+        string GetNom(){return this->nom;}
+        string GetPrenom(){return this->prenom;}
         char GetSexe(){return this->sexe;}
 
         // ----------- METHODS ---------- //
 
-        std::string affiche();
+        virtual string affiche();
+
+
 };
-
-
 
 
 #endif // CONTACT_H_INCLUDED

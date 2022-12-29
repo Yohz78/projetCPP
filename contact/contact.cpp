@@ -25,3 +25,13 @@ std::string Contact::affiche()
         << this->adresse.affiche();
     return oss.str();
 }
+
+ostream& operator<<(ostream& sortie, Adresse& adresse){
+    sortie << adresse.affiche();
+    return sortie;
+}
+
+ostream& operator<<(ostream& sortie, Contact& contact){
+        sortie << contact.affiche();
+        return sortie;
+}

@@ -18,7 +18,7 @@ Pro::~Pro()
          << this->GetnomEntreprise()<<endl;
 }
 
-void Pro::affiche()
+string Pro::affiche()
 {
     Contact::affiche();
 
