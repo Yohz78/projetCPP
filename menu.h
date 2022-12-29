@@ -45,24 +45,53 @@ void menu(){
 
     //Effectuer une recherche a l'aide du nom
     if(opt.compare("nom")==0){
+        string nom;
+        cout<<"\nMerci de saisir le nom du contact recherché : "<<endl;
+        cin>>nom;
         //ajouter ici un appel vers la fonction recherchant un contact à partir de son nom
-        cout<<"nom"<<endl;
     }
 
     //Effectuer une recherche a l'aide de la ville
     if(opt.compare("ville")==0){
         //ajouter ici un appel vers la fonction recherchant des contacts à partir de leur ville
-        cout<<"ville"<<endl;
+        string ville;
+        cout<<"\nMerci de saisir la ville recherchée : "<<endl;
+        cin>>ville;
+        cout<<ville<<endl;
     }
 
     //Ajouter un contact
     if(opt.compare("ajout")==0){
+        cout<<"S'agit-il d'un contact professionnel ou privé ?"<<endl;
+        cout<<"Tapez 'pro' pour un professionnel, 'private' pour un contact privé"<<endl;
+        string choix;
+        cin>>choix;
+        if(choix.compare("pro")==0){
+            int id;
+            string nom, prenom, nomEntreprise, email;
+            char sexe;
+            Adresse adresse;
+
+        }else if(choix.compare("private")==0){
+            int id, day, month, year;
+            string nom, prenom;
+            char sexe;
+            Adresse adresse;
+
+        }else{
+            cout<<"Saisie incorrecte. Retour au menu.\n"<<endl;
+            menu();
+        }
         //ajouter ici un appel vers la fonction permettant d'ajouter des contacts
         cout<<"ajout"<<endl;
     }
 
     //Supprimer un contact
     if(opt.compare("supprimer")==0){
+        string nom;
+        cout<<"\nMerci de saisir le nom du contact à supprimer : "<<endl;
+        cin>>nom;
+
         //ajouter ici un appel vers la fonction permettant de supprimer un contact à partir de son nom
         cout<<"supprimer"<<endl;
     }
