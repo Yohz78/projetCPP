@@ -17,3 +17,10 @@ string Private::Getddn(){
     string ddn = day+"/"+month+"/"+year;
     return ddn;
 }
+
+string Private::affiche(){
+    Contact::affiche();
+    ostringstream oss;
+    oss<<"Date de naissance "<<this->Getddn()<<endl;
+    return oss.str();
+}

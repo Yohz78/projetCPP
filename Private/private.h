@@ -27,6 +27,7 @@ class Private : public Contact
         Private(int, int, int);
 
         string Getddn();
+        string affiche();
 
     private:
         ddn dateNaissance;
