@@ -32,6 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Private/private.cpp" />
+		<Unit filename="Private/private.h" />
+		<Unit filename="Pro/pro.cpp" />
+		<Unit filename="Pro/pro.h" />
+		<Unit filename="contact/contact.cpp" />
+		<Unit filename="contact/contact.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
