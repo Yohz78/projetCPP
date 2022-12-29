@@ -32,11 +32,12 @@ class Contact {
 
     public:
         Contact(int=0,std::string="",std::string="",int=0,char=' ');
+        Contact(int,std::string,std::string,char);
         virtual ~Contact();
         void SetIdentifiant(int ID){ this->identifiant = ID;}
         void SetNom(std::string nom){ this->nom=nom;}
-        void SetPrenom(std::string prenom){ this->identifiant = prenom;}
-        void SetSexe(char sexe){ this->identifiant = sexe;}
+        void SetPrenom(std::string prenom){ this->prenom = prenom;}
+        void SetSexe(char sexe){ this->sexe = sexe;}
 
         int GetIdentifiant(){return this->identifiant;}
         std::string GetNom(){return this->nom;}
