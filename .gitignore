@@ -3,3 +3,6 @@
 *.csv
 *.pdf
 *.db
+bin/Debug
+obj/Debug
+
