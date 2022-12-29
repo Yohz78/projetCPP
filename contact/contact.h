@@ -7,14 +7,13 @@
 
 
 // OPERATOR << OVERLOAD
-/*
-std::ostream& operator<<(ostream& sortie, Contact& contact){
+/*std::ostream& operator<<(ostream& sortie, Contact& contact){
 
 } */
 
 
 // STRUCT ADRESSE
-typedef struct {
+struct Adresse{
     int numero;
     std::string rue;
     std::string complement;
@@ -30,7 +29,7 @@ typedef struct {
                   "Ville:"<< ville << "---"
                   << std::endl;
     }
-    //Adresse(){};
+    Adresse(){};
     Adresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
         this->numero = numero;
         this->rue = rue;
@@ -39,7 +38,9 @@ typedef struct {
         this->ville = ville;
     }
 
-}Adresse;
+};
+
+typedef struct Adresse Adresse;
 
 // CLASS CONTACT
 
