@@ -1,6 +1,7 @@
 #include "pro.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -20,6 +21,11 @@ Pro::~Pro()
 
 string Pro::affiche()
 {
-    Contact::affiche();
+    ostringstream oss;
+    oss << Contact::affiche();
+    oss  << "Entreprise: " << this->GetnomEntreprise() <<endl;
+    oss << "Mail: " << this->Getaddmail() <<endl;
+
+    return oss.str();
 
 }
