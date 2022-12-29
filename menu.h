@@ -62,21 +62,75 @@ void menu(){
 
     //Ajouter un contact
     if(opt.compare("ajout")==0){
+
+
         cout<<"S'agit-il d'un contact professionnel ou privé ?"<<endl;
         cout<<"Tapez 'pro' pour un professionnel, 'private' pour un contact privé"<<endl;
         string choix;
         cin>>choix;
-        if(choix.compare("pro")==0){
-            int id;
-            string nom, prenom, nomEntreprise, email;
-            char sexe;
-            Adresse adresse;
 
-        }else if(choix.compare("private")==0){
-            int id, day, month, year;
-            string nom, prenom;
+        //Saisie si le contact est un professionnel
+        if(choix.compare("pro")==0){
+            int id, numero, codepostal;
+            string nom, prenom, nomEntreprise, rue, email, complement, ville;
             char sexe;
             Adresse adresse;
+            cout<<"Quel est l'id du contact ? \n"<<endl;
+            cin>>id;
+            cout<<"\n Quel est le nom du contact ? \n"<<endl;
+            cin>>nom;
+            cout<<"\n Quel est le prenom du contact ? \n"<<endl;
+            cin>>prenom;
+            cout<<"\n Quelle est l'entreprise du contact ? \n"<<endl;
+            cin>>nomEntreprise;
+            cout<<"\n Quel est l'email du contact ? \n"<<endl;
+            cin>>email;
+            cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
+            cin>>sexe;
+            cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
+            cin>>numero;
+            cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
+            cin>>numero;
+            cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
+            cin>>complement;
+            cout<<"\n Quel est le code postal du contact ? \n"<<endl;
+            cin>>codepostal;
+            cout<<"\n Quelle est la ville du contact ? \n"<<endl;
+            cin>>ville;
+
+
+        //Saisie pour un contact privé
+        }else if(choix.compare("private")==0){
+            int id, day, month, year, numero, codepostal;
+            string nom, prenom, rue, complement, ville;
+            char sexe;
+            Adresse adresse;
+            cout<<"Quel est l'id du contact ? \n"<<endl;
+            cin>>id;
+            cout<<"\n Quel est le nom du contact ? \n"<<endl;
+            cin>>nom;
+            cout<<"\n Quel est le prenom du contact ? \n"<<endl;
+            cin>>prenom;
+            cout<<"\n Quel est l'année de naissance du contact? \n"<<endl;
+            cin>>year;
+            cout<<"\n Quel est le mois de naissance du contact (format aa/mm/yyyy) ? \n"<<endl;
+            cin>>month;
+            cout<<"\n Quel est le jour de naissance du contact (format aa/mm/yyyy) ?\n"<<endl;
+            cin>>day;
+            cout<<"\n Quel est l'email du contact ? \n"<<endl;
+            cin>>email;
+            cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
+            cin>>sexe;
+            cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
+            cin>>numero;
+            cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
+            cin>>numero;
+            cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
+            cin>>complement;
+            cout<<"\n Quel est le code postal du contact ? \n"<<endl;
+            cin>>codepostal;
+            cout<<"\n Quelle est la ville du contact ? \n"<<endl;
+            cin>>ville;
 
         }else{
             cout<<"Saisie incorrecte. Retour au menu.\n"<<endl;
