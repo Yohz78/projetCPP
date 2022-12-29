@@ -5,11 +5,12 @@
 
 using namespace std;
 
-struct ddn {
+struct ddn{
     int day;
     int month;
     int year;
 
+    ddn(){};
     ddn(int day, int month, int year){
         this->day=day;
         this->month=month;
@@ -17,13 +18,15 @@ struct ddn {
     }
 };
 
+typedef struct ddn;
+
 class Private : public Contact
 {
     public:
         virtual ~Private();
+        Private(int, int, int);
 
         string Getddn();
-        void Setddn(int day, int month, int year);
 
     private:
         ddn dateNaissance;

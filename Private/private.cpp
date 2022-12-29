@@ -1,10 +1,19 @@
 #include "private.h"
+#include <string>
 
 Private::~Private(){
     cout<<"Destruction du contact privé"<<this->GetNom()<<endl;
 }
 
-void Private::Setddn(int day, int month, int year){
-    ddn Datenaissance(day, month, year);
-    this->dateNaissance=Datenaissance;
+Private::Private(int day, int month, int year):Contact(){
+       this->dateNaissance=ddn(day, month, year);
+}
+
+string Private::Getddn(){
+    ddn dateNaissance=this->dateNaissance;
+    string day = to_string(dateNaissance.day);
+    string month = to_string(dateNaissance.month);
+    string year = to_string(dateNaissance.year);
+    string ddn = day+"/"+month+"/"+year;
+    return ddn;
 }
