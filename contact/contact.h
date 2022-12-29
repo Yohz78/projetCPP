@@ -30,7 +30,7 @@ typedef struct {
                   "Ville:"<< ville << "---"
                   << std::endl;
     }
-    Adresse(){};
+    //Adresse(){};
     Adresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
         this->numero = numero;
         this->rue = rue;
