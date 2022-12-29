@@ -18,11 +18,13 @@ Contact::~Contact(){
 std::string Contact::affiche()
 {
     std::ostringstream oss;
+    fflush(stdout);
     oss << "Contact: "
-        << this->GetNom() << "---"
-        << this->GetPrenom() << "---"
-        << this->GetSexe() << "---"
-        << this->adresse.affiche();
+        <<"ID: " << this->GetIdentifiant()  << std::endl
+        <<"Nom: "<< this->GetNom()  << std::endl
+        <<"Prenom: "<< this->GetPrenom()  << std::endl
+        <<"Sexe: "<< this->GetSexe()  << std::endl
+        <<"Adresse: "<< this->adresse.affiche();
     return oss.str();
 }
 

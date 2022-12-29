@@ -17,12 +17,11 @@ struct Adresse{
 
         string affiche(){
         ostringstream oss;
-        cout << "L'adresse est la suivante: " <<
-                  "Num:"<< numero << "---" <<
+        oss <<    "Num:"<< numero << "---" <<
                   "Rue:"<< rue << "---"  <<
                   "Cplt:"<< complement << "---" <<
                   "CP:"<< codePostal << "---" <<
-                  "Ville:"<< ville << "---"
+                  "Ville:"<< ville
                   << endl;
         return oss.str();
     }
