@@ -20,7 +20,8 @@ struct Adresse{
     int codePostal;
     std::string ville;
 
-    void affiche(){
+    std::string affiche(){
+        std::ostringstream oss;
         std::cout << "L'adresse est la suivante: " <<
                   "Num:"<< numero << "---" <<
                   "Rue:"<< rue << "---"  <<
@@ -28,9 +29,17 @@ struct Adresse{
                   "CP:"<< codePostal << "---" <<
                   "Ville:"<< ville << "---"
                   << std::endl;
+        return oss.str();
     }
     Adresse(){};
     Adresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
+        this->numero = numero;
+        this->rue = rue;
+        this->complement = complement;
+        this->codePostal = codePostal;
+        this->ville = ville;
+    }
+    void SetAdresse(int numero,std::string rue,std::string complement,int codePostal,std::string ville){
         this->numero = numero;
         this->rue = rue;
         this->complement = complement;
@@ -63,12 +72,12 @@ class Contact {
         void SetPrenom(std::string prenom){ this->prenom = prenom;} // FAIRE FIRST MAJUSCULE
         void SetSexe(char sexe){ this->sexe = sexe;}
 
+
         // ----------- GETTERS ---------- //
         int GetIdentifiant(){return this->identifiant;}
         std::string GetNom(){return this->nom;}
         std::string GetPrenom(){return this->prenom;}
         char GetSexe(){return this->sexe;}
-        Adresse GetAdresse(){return this->adresse;}
 
         // ----------- METHODS ---------- //
 

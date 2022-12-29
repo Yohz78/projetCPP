@@ -21,7 +21,7 @@ std::string Contact::affiche()
     oss << "Contact: "
         << this->GetNom() << "---"
         << this->GetPrenom() << "---"
-        << this->GetSexe() << "---";
-        //<< this->GetAdresse();
+        << this->GetSexe() << "---"
+        << this->adresse.affiche();
     return oss.str();
 }
