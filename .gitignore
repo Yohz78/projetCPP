@@ -3,6 +3,8 @@
 *.csv
 *.pdf
 *.db
+*.depend
+*.layout
 bin/Debug
 obj/Debug
 
