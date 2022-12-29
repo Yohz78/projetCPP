@@ -18,7 +18,7 @@ struct ddn{
     }
 };
 
-typedef struct ddn;
+typedef struct ddn ddn;
 
 class Private : public Contact
 {
