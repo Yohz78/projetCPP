@@ -24,7 +24,7 @@ class Private : public Contact
 {
     public:
         virtual ~Private();
-        Private(int, int, int);
+        Private(int,string,string,char,Adresse,int, int, int);
 
         string Getddn();
         string affiche();

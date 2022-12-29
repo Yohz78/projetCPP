@@ -9,11 +9,11 @@ class Pro: public Contact
 
     public:
 
-    Pro(int,string,string, int, string, string);
-     virtual~Pro();
+    Pro(int,string,string,char,Adresse,string, string);
+    virtual~Pro();
 
-     void SetnomEntreprise(string n){this->nomEntreprise=n;}
-     string GetnomEntreprise(){return this->nomEntreprise;}
+    void SetnomEntreprise(string n){this->nomEntreprise=n;}
+    string GetnomEntreprise(){return this->nomEntreprise;}
 
     void Setaddmail(string ad){this->addmail=ad;}
     string Getaddmail(){return this->addmail;}

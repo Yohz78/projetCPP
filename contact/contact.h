@@ -64,8 +64,10 @@ class Contact {
 
         // ----------- SETTERS ---------- //
         void SetIdentifiant(int ID){ this->identifiant = ID;}
-        void SetNom(string nom){ this->nom=nom;} // FAIRE FULL MAJUSCULE
-        void SetPrenom(string prenom){ this->prenom = prenom;} // FAIRE FIRST MAJUSCULE
+        //void SetNom(string nom){ this->nom=nom;}
+        void SetNom(string);
+        //void SetPrenom(string prenom){ this->prenom = prenom;}
+        void SetPrenom(string);
         void SetSexe(char sexe){ this->sexe = sexe;}
 
 

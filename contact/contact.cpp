@@ -37,3 +37,19 @@ ostream& operator<<(ostream& sortie, Contact& contact){
         sortie << contact.affiche();
         return sortie;
 }
+
+void Contact::SetNom(string nom){
+    this->nom = nom;
+
+    for(int i=0; i < this->nom.length(); i++){
+        this->nom[i] = toupper(this->nom[i]);
+    }
+}
+
+void Contact::SetPrenom(string prenom){
+    this->prenom = prenom;
+    this->prenom[0] = toupper(prenom[0]);
+    for(int i=1; i < prenom.length(); i++){
+        this->prenom[i] = tolower(prenom[i]);
+    }
+}

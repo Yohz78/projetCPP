@@ -1,4 +1,5 @@
 #include "pro.h"
+#include "../contact/contact.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -6,18 +7,14 @@
 using namespace std;
 
 
-Pro::Pro(int id , string rue, string comp, int cp, string addmail, string nomEntreprise)
-  :Contact(id, rue, comp, cp)
+Pro::Pro(int id, string nom, string prenom, char sexe, Adresse adresse, string nomEntreprise, string addmail)
+  :Contact(id, nom, prenom, sexe, adresse)
 {
     this->Setaddmail(addmail);
     this->SetnomEntreprise(nomEntreprise);
 }
 
-Pro::~Pro()
-{
-    cout << "Destruction du contact"
-         << this->GetnomEntreprise()<<endl;
-}
+Pro::~Pro(){}
 
 string Pro::affiche()
 {

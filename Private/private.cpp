@@ -1,11 +1,10 @@
 #include "private.h"
 #include <string>
 
-Private::~Private(){
-    cout<<"Destruction du contact privé"<<this->GetNom()<<endl;
-}
+Private::~Private(){}
 
-Private::Private(int day, int month, int year):Contact(){
+Private::Private(int id, string nom, string prenom, char sexe, Adresse adresse,int day, int month, int year)
+:Contact(id, nom, prenom, sexe, adresse){
        this->dateNaissance=ddn(day, month, year);
 }
 
@@ -21,6 +20,6 @@ string Private::Getddn(){
 string Private::affiche(){
     ostringstream oss;
     oss << Contact::affiche();
-    oss <<"Date de naissance "<<this->Getddn()<<endl;
+    oss <<"Date de naissance: "<< this->Getddn()<<endl;
     return oss.str();
 }
