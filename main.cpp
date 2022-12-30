@@ -28,18 +28,18 @@ int main()
 
     char requete[100+1] = "SELECT * FROM contacts";
     char requetePro[200+1] = "SELECT IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NOT NULL";
-    char requetePrivate[200+1] = "SELECT IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NULL";
-    select_db(requetePrivate,db);
+    char requetePrivate[200+1] = "SELECT IdContact,nom,prenom,sexe,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NULL";
+    select_db(requete,db);
 
-    vector<Contact> test;
-    test = build_from_database(db);
+    vector<Contact> build_db;
+    build_from_database(db,&build_db);
 
-    cout << "on affiche test" << endl;
-    cout << "on affiche test.size():" << test.size()  << endl;
+    cout << "on affiche build_db" << endl;
+    cout << "on affiche build_db.size():" << build_db.size()  << endl;
 
 
-    for(int i = 0; i<test.size();i++){
-        cout << test[i].affiche() << endl;
+    for(int i = 0; i<build_db.size();i++){
+        cout << build_db[i].affiche() << endl;
     }
 
     sqlite3_close(db);
