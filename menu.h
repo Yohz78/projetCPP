@@ -145,7 +145,7 @@ void menu(){
 
             cout<<"\n Quel est le jour de naissance du contact (format aa/mm/yyyy) ?\n"<<endl;
             cin>>day;
-            if(day<1||day>31){
+            while(day<1||day>31){
                 cout<<"Merci de saisir un chiffre entre 1 et 31"<<endl;
                 cin>>day;
             }
