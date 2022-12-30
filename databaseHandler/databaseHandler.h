@@ -9,7 +9,7 @@
 class databaseHandler
 {
     public:
-        databaseHandler(sqlite3*);
+        databaseHandler(sqlite3*,char*);
         virtual ~databaseHandler();
 
         //sqlite3 Getdb() { return *db; }

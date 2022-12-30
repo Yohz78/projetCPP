@@ -4,18 +4,18 @@
 #include <string>
 #include <iostream>
 
-databaseHandler::databaseHandler(sqlite3* db)
+databaseHandler::databaseHandler(sqlite3* db, char* databaseName)
 {
     this->db = db;
     this->SetzErrMsg('0');
-    this->rc = (sqlite3_open("test.db",&db));
-    if(rc){
-        fprintf(stderr , "Can't open database : %s n", sqlite3_errmsg(db));
+    this->rc = (sqlite3_open(databaseName,&db));
+    if(rc != SQLITE_OK){
+        fprintf(stderr , "Can't open database : %s \n", sqlite3_errmsg(db));
         exit(0);
     }
     else
     {
-        fprintf(stderr , "Opened database successfully n");
+        fprintf(stderr , "Opened database successfully \n");
     }
     sqlite3_close(db);
 }
