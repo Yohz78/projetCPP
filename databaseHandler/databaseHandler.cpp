@@ -3,7 +3,18 @@
 
 #include <string>
 #include <iostream>
+#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
 
+static int callback(void *data, int argc, char **argv, char **azColName){
+   int i;
+   fprintf(stderr, "%s: ", (const char*)data);
+
+   for(i = 0; i<argc; i++){
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+}
 databaseHandler::databaseHandler(char* databaseName)
 {
     this->db = NULL;
@@ -37,30 +48,36 @@ void databaseHandler::open()
 void databaseHandler::liste(string requete)
 {
     sqlite3_stmt *stmt = NULL;
+    const char* data = "Callback function called";
 
     if(requete.empty()){
             this->rc = sqlite3_prepare_v2( this->db,"SELECT * FROM contacts",-1,&stmt,NULL);
+
     }
-    if(requete == "Pro"){
-            this->rc = sqlite3_prepare_v2( this->db,"SELECT * FROM contacts WHERE Entreprise is NOT NULL",-1,&stmt,NULL);
+    if(requete.compare("Pro")==0){
+            cout << "On est sur pro" << endl;
+            //this->rc = sqlite3_prepare_v2( this->db,"SELECT * FROM contacts WHERE Entreprise is NOT NULL",-1,&stmt,NULL);
+            this->rc = sqlite3_exec(this->db,"SELECT * FROM contacts WHERE Entreprise is NOT NULL",callback, (void*)data, &this->zErrMsg);
     }
-    if(requete == "Private"){
+    if(requete.compare("Private")==0){
+            cout << "On est sur private" << endl;
             this->rc = sqlite3_prepare_v2( this->db,"SELECT * FROM contacts WHERE Entreprise is NULL ",-1,&stmt,NULL);
     }
 
-    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-    {
+    //while ((this->rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    //{
+        //cout << "dans le while" << endl;
         printf("ID: %d", sqlite3_column_int(stmt,0));
-        printf("Nom: %s", sqlite3_column_name(stmt,1));
-        printf("Prenom: %s", sqlite3_column_name(stmt,2));
-        printf("Sexe: %c", sqlite3_column_name(stmt,3));
-        printf("Entreprise: %s", sqlite3_column_name(stmt,4));
+        printf("Nom: %s", sqlite3_column_text(stmt,1));
+        printf("Prenom: %s", sqlite3_column_text(stmt,2));
+        printf("Sexe: %c", sqlite3_column_text(stmt,3));
+        printf("Entreprise: %s", sqlite3_column_text(stmt,4));
         /*printf("Rue: %s", sqlite3_column(stmt,5));
         printf("Rue: %s", sqlite3_column(stmt,6));
         printf("Rue: %s", sqlite3_column(stmt,7));
         printf("Rue: %s", sqlite3_column(stmt,8));
         printf("Rue: %s", sqlite3_column(stmt,9));*/
-    }
+    //}
 
     sqlite3_finalize(stmt);
 

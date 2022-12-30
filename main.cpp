@@ -13,11 +13,55 @@ int main()
 {
     //menu();
 
-    databaseHandler bdd("dbContacts.db");
+    //databaseHandler bdd("dbContacts.db");
+    //bdd.liste("Pro");
+
+ sqlite3 *db = NULL;
+    char zErrMsg='0';
+    int rc = (sqlite3_open("dbContacts.db",&db));
+    if(rc != SQLITE_OK){
+        fprintf(stderr , "Can't open database : %s \n", sqlite3_errmsg(db));
+        return 0;
+    }
+    else
+    {
+        fprintf(stderr , "Opened database successfully \n");
+    }
+    sqlite3_stmt *stmt = NULL;
+    rc = sqlite3_prepare_v2( db,"SELECT * FROM contacts",-1,&stmt,NULL);
+    sqlite3_step(stmt);
+    int colCount = sqlite3_column_count(stmt);
+    cout << "ColCount: " << colCount << endl;
+    for(int i=0;i<sqlite3_column_count(stmt);i++){ //
+        cout << "i= " << i << endl;
+        cout << "typeCol:" << sqlite3_column_type(stmt,i) << endl;
+        for(int i=0;i<sqlite3_column_count(stmt);i++){
+            if(sqlite3_column_type(stmt,i) == 1){
+                printf("ID: %d \n",sqlite3_column_int(stmt, i));
+            }
+        }
+        for(int i=0;i<sqlite3_column_count(stmt);i++){
+            if(sqlite3_column_type(stmt,i) == 3){
+                printf("Type 3: %s\n",sqlite3_column_text(stmt, i));
+            }
+        }
+        for(int i=0;i<sqlite3_column_count(stmt);i++){
+            if(sqlite3_column_type(stmt,i) == 5){
+                printf("NULL \n");
+            }
+        }
+        sqlite3_step(stmt);
+        //cout << rc << endl;
+    }
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 
     //cout << "Hello world!" << endl;
+
     return 0;
 }
+
+
 
 
 void test1(){
