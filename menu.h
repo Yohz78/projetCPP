@@ -11,7 +11,7 @@ using namespace std;
 
 bool Email_check(string email)
 {
-     const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
     return regex_match(email,pattern);
 }
 
@@ -94,12 +94,11 @@ void menu(){
             cin>>nomEntreprise;
             cout<<"\n Quel est l'email du contact ? \n"<<endl;
             cin>>email;
-            if(Email_check(email)){
-                cout<<"/n Email valide /n";
-            }else{
-                cout<<"Email invalide. Retour au menu.";
-                menu();
+            while(Email_check(email)==false){
+                cout<<"Email invalide. Merci de saisir une adresse email correcte :";
+                cin>>email;
             }
+
             cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
             cin>>sexe;
             cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
@@ -118,7 +117,7 @@ void menu(){
         }else if(choix.compare("private")==0){
             int id, day, month, year, numero, codepostal;
             string nom, prenom, rue, complement, ville;
-            char sexe;
+            string sexe;
             Adresse adresse;
 
             cout<<"Quel est l'id du contact ? \n"<<endl;
@@ -132,14 +131,14 @@ void menu(){
 
             cout<<"\n Quel est l'année de naissance du contact? \n"<<endl;
             cin>>year;
-            if(year<1900||year>2020){
+            while(year<1900||year>2020){
                 cout<<"Merci de saisir une année comprise entre 1900 et 2020"<<endl;
                 cin>>year;
             }
 
             cout<<"\n Quel est le mois de naissance du contact (format aa/mm/yyyy) ? \n"<<endl;
             cin>>month;
-            if(month<1||month>12){
+            while(month<1||month>12){
                 cout<<"Merci de saisir un chiffre entre 1 et 12"<<endl;
                 cin>>month;
             }
@@ -151,8 +150,10 @@ void menu(){
                 cin>>day;
             }
 
-            cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
-            cin>>sexe;
+            while(sexe!="H"||sexe!="F"){
+                cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
+                cin>>sexe;
+            }
             cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
             cin>>numero;
             cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
