@@ -26,9 +26,23 @@ int main()
         fprintf(stderr , "Opened database successfully \n");
     }
 
-    char* requete = "SELECT * FROM contacts";
+    char requete[100+1] = "SELECT * FROM contacts";
+    char requetePro[200+1] = "SELECT IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NOT NULL";
+    char requetePrivate[200+1] = "SELECT IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NULL";
+    select_db(requetePrivate,db);
 
-    select_db(requete,db);
+    vector<Contact> test;
+    test = build_from_database(db);
+
+    cout << "on affiche test" << endl;
+    cout << "on affiche test.size():" << test.size()  << endl;
+
+
+    for(int i = 0; i<test.size();i++){
+        cout << test[i].affiche() << endl;
+    }
+
+    sqlite3_close(db);
 
     //menu();
 

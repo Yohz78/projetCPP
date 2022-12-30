@@ -14,7 +14,6 @@
 // LISTE DES FONCTIONS
 // MANIPULATIONS DES REQUETES
 
-typedef std::basic_string <unsigned char> ustring;
 
 void select_db(char* requete,sqlite3 *db){
 
@@ -60,20 +59,30 @@ void select_db(char* requete,sqlite3 *db){
 std::vector<Contact> build_from_database(sqlite3* db){
     std::vector<Contact> build_db;
     sqlite3_stmt *stmt = NULL;
-    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail WHERE entreprise IS NOT NULL",-1,&stmt, NULL);
+    sqlite3_stmt *stmt2 = NULL;
+    int rc = sqlite3_prepare_v2(db,"SELECT IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail FROM contacts WHERE entreprise IS NOT NULL",-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
     std::string rue = (const char*)sqlite3_column_text(stmt,5);
-    std::string complement = (const char*)sqlite3_column_text(stmt,6);
+    cout << rue << endl;
+    std::string complement = "";
+    if(sqlite3_column_text(stmt,6)!=NULL){complement = (const char*)sqlite3_column_text(stmt,6);}
+    cout << complement << endl;
     std::string ville = (const char*)sqlite3_column_text(stmt,8);
+    cout << ville << endl;
     Adresse A(rue,complement,sqlite3_column_int(stmt,7),ville);
 
     //int id = sqlite3_column_int(stmt,0); // ID
     std::string nom = (const char*)sqlite3_column_text(stmt,1);// NOM
+    cout << nom << endl;
     std::string prenom = (const char*)sqlite3_column_text(stmt,2);// PRENOM
+    cout << prenom << endl;
     std::string sexe = (const char*)sqlite3_column_text(stmt,3);// SEXE
+    cout << sexe << endl;
     std::string entreprise = (const char*)sqlite3_column_text(stmt,4);// ENTREPRISE
+    cout << entreprise << endl;
     std::string mail = (const char*)sqlite3_column_text(stmt,9);// MAIL
+    cout << mail << endl;
 
     Pro B(sqlite3_column_int(stmt,0), // ID
                             nom,        // NOM
@@ -82,34 +91,36 @@ std::vector<Contact> build_from_database(sqlite3* db){
                             A,           // ADRESSE
                             entreprise, // ENTREPRISE
                             mail);        // MAIL
-
+    cout << "On a cree: " << B.affiche() << endl;
     build_db.push_back(B);
     }
 
     sqlite3_finalize(stmt);
 
-    rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance WHERE entreprise IS NULL",-1,&stmt, NULL);
-    while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
+    rc = sqlite3_prepare_v2(db,"SELECT IdContact,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance FROM contacts WHERE entreprise IS NULL",-1,&stmt2, NULL);
+    while ( (rc = sqlite3_step(stmt2)) == SQLITE_ROW){
 
-    std::string rue = (const char*)sqlite3_column_text(stmt,4);
-    std::string complement = (const char*)sqlite3_column_text(stmt,5);
-    std::string ville = (const char*)sqlite3_column_text(stmt,7);
+    std::string rue = (const char*)sqlite3_column_text(stmt2,4);
+    std::string complement = "";
+    if(sqlite3_column_text(stmt,6)!=NULL){complement = (const char*)sqlite3_column_text(stmt,5);}
+    std::string ville = (const char*)sqlite3_column_text(stmt2,7);
 
-    std::string nom = (const char*)sqlite3_column_text(stmt,1);// NOM
-    std::string prenom = (const char*)sqlite3_column_text(stmt,2);// PRENOM
-    std::string sexe = (const char*)sqlite3_column_text(stmt,3);// SEXE
-    std::string dateNaissance = (const char*)sqlite3_column_text(stmt,8);// DATE NAISSANCE
+    std::string nom = (const char*)sqlite3_column_text(stmt2,1);// NOM
+    std::string prenom = (const char*)sqlite3_column_text(stmt2,2);// PRENOM
+    std::string sexe = (const char*)sqlite3_column_text(stmt2,3);// SEXE
+    std::string dateNaissance = (const char*)sqlite3_column_text(stmt2,8);// DATE NAISSANCE
 
-    Adresse A(rue,complement,sqlite3_column_int(stmt,6),ville);
-    Private C(sqlite3_column_int(stmt,0),   // ID
+    Adresse A(rue,complement,sqlite3_column_int(stmt2,6),ville);
+    Private C(sqlite3_column_int(stmt2,0),   // ID
                             nom,            // NOM
                             prenom,         // PRENOM
                             sexe,           // SEXE
                             A,               // ADRESSE
                             dateNaissance);// DATE NAISSANCE
+    cout << "On a cree: " << C.affiche() << endl;
     build_db.push_back(C);
     }
-    sqlite3_finalize(stmt);
+    sqlite3_finalize(stmt2);
 
     return build_db;
 }
