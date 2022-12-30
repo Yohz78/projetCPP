@@ -4,13 +4,16 @@
 #include "Private/private.h"
 #include "Pro/pro.h"
 #include "menu.h"
+#include "databaseHandler/databaseHandler.h"
 
 
 using namespace std;
 
 int main()
 {
-    menu();
+    //menu();
+
+    databaseHandler bdd("dbContacts.db");
 
     //cout << "Hello world!" << endl;
     return 0;

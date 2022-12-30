@@ -4,11 +4,11 @@
 #include <string>
 #include <iostream>
 
-databaseHandler::databaseHandler(sqlite3* db, char* databaseName)
+databaseHandler::databaseHandler(char* databaseName)
 {
-    this->db = db;
+    this->db = NULL;
     this->SetzErrMsg('0');
-    this->rc = (sqlite3_open(databaseName,&db));
+    this->rc = (sqlite3_open(databaseName,&this->db));
     if(rc != SQLITE_OK){
         fprintf(stderr , "Can't open database : %s \n", sqlite3_errmsg(db));
         exit(0);
