@@ -8,9 +8,7 @@
 // PENSER AU TYPE DE RETOUR
 // LISTE DES FONCTIONS
 // MANIPULATIONS DES REQUETES
-
-<<<<<<< HEAD
-
+/*
 void select(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 =======
 /*
@@ -104,7 +102,7 @@ IdContact        integer primary key autoincrement not null,
         Ville                varchar(100) ,
         mail                varchar(250) ,
         dtNaissance        date
-*/
+
 
 
 void insert_database(Contact *p){
@@ -112,6 +110,4 @@ void insert_database(Contact *p){
 
 void delete_database(int id){
 }
-=======
 */
->>>>>>> 3c9744296cd8b987ee4b0111189902f9573723f4

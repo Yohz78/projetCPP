@@ -85,7 +85,7 @@ void menu(){
         if(choix.compare("pro")==0){
             int id, numero, codepostal;
             string nom, prenom, nomEntreprise, rue, email, complement, ville;
-            char sexe;
+            string sexe;
 
             cout<<"Quel est l'id du contact ? \n"<<endl;
             cin>>id;
@@ -128,7 +128,7 @@ void menu(){
             cout<<"\n Quelle est la ville du contact ? \n"<<endl;
             cin>>ville;
             Adresse adresse(numero,rue,complement,codepostal,ville);
-            Pro newPro();
+            Pro newPro(id,nom,prenom,sexe,adresse, nomEntreprise, email);
 
 
         //Saisie pour un contact privé
