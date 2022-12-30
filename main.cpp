@@ -11,12 +11,15 @@ using namespace std;
 
 int main()
 {
+
+    string test = "15, rue des lilas";
+    char *ptr=NULL;
     //menu();
 
     //databaseHandler bdd("dbContacts.db");
     //bdd.liste("Pro");
 
- sqlite3 *db = NULL;
+ /*sqlite3 *db = NULL;
     char zErrMsg='0';
     int rc = (sqlite3_open("dbContacts.db",&db));
     if(rc != SQLITE_OK){
@@ -54,7 +57,7 @@ int main()
         //cout << rc << endl;
     }
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
+    sqlite3_close(db); */
 
     //cout << "Hello world!" << endl;
 

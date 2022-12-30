@@ -86,7 +86,7 @@ void menu(){
             Adresse adresse;
             cout<<"Quel est l'id du contact ? \n"<<endl;
             cin>>id;
-            ccout<<"\n Quel est le nom du contact ? \n"<<endl;
+            cout<<"\n Quel est le nom du contact ? \n"<<endl;
             cin>>nom;
             while(nom.length()>30){
                 cout<<"Merci de saisir un nom de moins de 30 caractères"<<endl;
