@@ -5,6 +5,6 @@
 *.db
 *.depend
 *.layout
-bin/Debug
-obj/Debug
+bin/
+obj/
 
