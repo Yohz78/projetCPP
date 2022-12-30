@@ -127,6 +127,8 @@ void menu(){
             cin>>codepostal;
             cout<<"\n Quelle est la ville du contact ? \n"<<endl;
             cin>>ville;
+            Adresse adresse(numero,rue,complement,codepostal,ville);
+            Pro newPro();
 
 
         //Saisie pour un contact privé

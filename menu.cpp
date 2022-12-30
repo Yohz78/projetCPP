@@ -6,7 +6,6 @@
 // LISTE DES FONCTIONS
 // MANIPULATIONS DES REQUETES
 
-/*
 void liste(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
     sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
@@ -24,4 +23,3 @@ void liste(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE 
     }
     sqlite3_finalize(stmt);
 }
-*/
