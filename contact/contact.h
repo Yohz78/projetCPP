@@ -55,11 +55,11 @@ class Contact {
         int identifiant;
         string nom;
         string prenom;
-        char sexe;
+        string sexe;
         Adresse adresse;
 
     public:
-        Contact(int=0,string="",string="",char=' ',Adresse=Adresse());
+        Contact(int=0,string="",string="",string="",Adresse=Adresse());
         virtual ~Contact();
 
         // ----------- SETTERS ---------- //
@@ -75,7 +75,7 @@ class Contact {
         int GetIdentifiant(){return this->identifiant;}
         string GetNom(){return this->nom;}
         string GetPrenom(){return this->prenom;}
-        char GetSexe(){return this->sexe;}
+        string GetSexe(){return this->sexe;}
 
         // ----------- METHODS ---------- //
 

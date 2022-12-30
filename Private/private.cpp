@@ -3,7 +3,7 @@
 
 Private::~Private(){}
 
-Private::Private(int id, string nom, string prenom, char sexe, Adresse adresse,int day, int month, int year)
+Private::Private(int id, string nom, string prenom, string sexe, Adresse adresse,int day, int month, int year)
 :Contact(id, nom, prenom, sexe, adresse){
        this->dateNaissance=ddn(day, month, year);
 }

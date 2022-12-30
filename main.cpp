@@ -80,17 +80,17 @@ void test1(){
     //A.affiche();
 
     cout << "--------------------------------" << endl;
-    Contact Lucas(10,nom1,prenom1,'M',A);
+    Contact Lucas(10,nom1,prenom1,"M",A);
     cout << Lucas.affiche();
     cout << "--------------------------------" << endl;
 
     cout << "--------------------------------" << endl;
-    Pro totoLucas(10,nom2,prenom2,'M',A,entreprise,mail);
+    Pro totoLucas(10,nom2,prenom2,"M",A,entreprise,mail);
     cout << totoLucas.affiche();
     cout << "--------------------------------" << endl;
 
     cout << "--------------------------------" << endl;
-    Private totoLucas2(10,nom2,prenom2,'M',A,10,10,10);
+    Private totoLucas2(10,nom2,prenom2,"M",A,10,10,10);
     cout << totoLucas2.affiche();
     cout << "--------------------------------" << endl;
 }

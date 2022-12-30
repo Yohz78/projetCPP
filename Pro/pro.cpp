@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Pro::Pro(int id, string nom, string prenom, char sexe, Adresse adresse, string nomEntreprise, string addmail)
+Pro::Pro(int id, string nom, string prenom, string sexe, Adresse adresse, string nomEntreprise, string addmail)
   :Contact(id, nom, prenom, sexe, adresse)
 {
     this->Setaddmail(addmail);

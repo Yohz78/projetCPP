@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-Contact::Contact(int identifiant,std::string nom,std::string prenom,char sexe, Adresse adresse){
+Contact::Contact(int identifiant,std::string nom,std::string prenom,string sexe, Adresse adresse){
     this->identifiant = identifiant;
     this->SetNom(nom) ;
     this->SetPrenom(prenom);
