@@ -86,12 +86,25 @@ void menu(){
             Adresse adresse;
             cout<<"Quel est l'id du contact ? \n"<<endl;
             cin>>id;
-            cout<<"\n Quel est le nom du contact ? \n"<<endl;
+            ccout<<"\n Quel est le nom du contact ? \n"<<endl;
             cin>>nom;
+            while(nom.length()>30){
+                cout<<"Merci de saisir un nom de moins de 30 caractères"<<endl;
+                cin>>nom;
+            }
+
             cout<<"\n Quel est le prenom du contact ? \n"<<endl;
             cin>>prenom;
+            while(prenom.length()>30){
+                cout<<"Merci de saisir un prenom de moins de 30 caractères"<<endl;
+                cin>>prenom;
+            }
             cout<<"\n Quelle est l'entreprise du contact ? \n"<<endl;
             cin>>nomEntreprise;
+              while(nomEntreprise.length()>50){
+                cout<<"Merci de saisir un nom d'entreprise de moins de 50 caractères"<<endl;
+                cin>>nom;
+            }
             cout<<"\n Quel est l'email du contact ? \n"<<endl;
             cin>>email;
             while(Email_check(email)==false){
@@ -125,9 +138,17 @@ void menu(){
 
             cout<<"\n Quel est le nom du contact ? \n"<<endl;
             cin>>nom;
+            while(nom.length()>30){
+                cout<<"Merci de saisir un nom de moins de 30 caractères"<<endl;
+                cin>>nom;
+            }
 
             cout<<"\n Quel est le prenom du contact ? \n"<<endl;
             cin>>prenom;
+            while(prenom.length()>30){
+                cout<<"Merci de saisir un prenom de moins de 30 caractères"<<endl;
+                cin>>prenom;
+            }
 
             cout<<"\n Quel est l'année de naissance du contact? \n"<<endl;
             cin>>year;
@@ -150,7 +171,7 @@ void menu(){
                 cin>>day;
             }
 
-            while(sexe!="H"||sexe!="F"){
+            while(sexe.compare("H")!=0||sexe.compare("H")!=0){
                 cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
                 cin>>sexe;
             }
