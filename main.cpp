@@ -5,6 +5,7 @@
 #include "Private/private.h"
 #include "Pro/pro.h"
 #include "menu.h"
+#include "menu.cpp"
 #include "databaseHandler/databaseHandler.h"
 
 
@@ -13,22 +14,21 @@ using namespace std;
 int main()
 {
 
-    char str[100]; // declare the size of string
-    cout << " Enter a string: " <<endl;
-    cin.getline(str, 100); // use getline() function to read a string from input stream
-
-    char *ptr; // declare a ptr pointer
-    ptr = strtok(str, " , "); // use strtok() function to separate string using comma (,) delimiter.
-    cout << " \n Split string using strtok() function: " << endl;
-    // use while loop to check ptr is not null
-    *str = str[strlen(ptr)+1];
-    printf("%s\n",str);
-    while (ptr != NULL)
+    sqlite3 *db = NULL;
+    char zErrMsg='0';
+    int rc = (sqlite3_open("dbContacts.db",&db));
+    if(rc != SQLITE_OK){
+        fprintf(stderr , "Can't open database : %s \n", sqlite3_errmsg(db));
+        return 0;
+    }
+    else
     {
-        cout << ptr  << endl; // print the string token
-        ptr = strtok (NULL, " , ");
+        fprintf(stderr , "Opened database successfully \n");
     }
 
+    char* requete = "SELECT * FROM contacts";
+
+    select_db(requete,db);
 
     //menu();
 

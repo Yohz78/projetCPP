@@ -3,15 +3,20 @@
 #include <string>
 #include <vector>
 
+#include "sqlite3.h"
+#include "contact/contact.h"
+#include "Private/private.h"
+#include "Pro/pro.h"
+
 // FAIRE DES FONCTIONS POUR MANIPULER LA BDD
 
 // PENSER AU TYPE DE RETOUR
 // LISTE DES FONCTIONS
 // MANIPULATIONS DES REQUETES
 
+typedef std::basic_string <unsigned char> ustring;
 
-
-void select(std::string requete,sqlite3 *db){
+void select_db(char* requete,sqlite3 *db){
 
     sqlite3_stmt *stmt = NULL;
     int rc = sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
@@ -28,7 +33,7 @@ void select(std::string requete,sqlite3 *db){
     }
     sqlite3_finalize(stmt);} // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
-vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
+/*vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
     vector<std::string> to_string;
     std::ostringstream oss;
@@ -49,51 +54,64 @@ vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER 
     sqlite3_finalize(stmt);
 
     return to_string;
-}
+}*/
 
 
-std::vector<Contact> build_from_database(){
+std::vector<Contact> build_from_database(sqlite3* db){
     std::vector<Contact> build_db;
     sqlite3_stmt *stmt = NULL;
-    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail WHERE entreprise IS NOT NULL", ,-1,&stmt, NULL);
+    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail WHERE entreprise IS NOT NULL",-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
-    printf("ID: %d", sqlite3_column_int(stmt,0));
+    std::string rue = (const char*)sqlite3_column_text(stmt,5);
+    std::string complement = (const char*)sqlite3_column_text(stmt,6);
+    std::string ville = (const char*)sqlite3_column_text(stmt,8);
+    Adresse A(rue,complement,sqlite3_column_int(stmt,7),ville);
 
-    printf("\nNom: %s %s", sqlite3_column_text(stmt,1));
-    printf("\nPrenom: %s", sqlite3_column_text(stmt,2));
-    printf("\nSexe: %s", sqlite3_column_text(stmt,3));
-    printf("\nEntreprise: %s", sqlite3_column_text(stmt,4));
+    //int id = sqlite3_column_int(stmt,0); // ID
+    std::string nom = (const char*)sqlite3_column_text(stmt,1);// NOM
+    std::string prenom = (const char*)sqlite3_column_text(stmt,2);// PRENOM
+    std::string sexe = (const char*)sqlite3_column_text(stmt,3);// SEXE
+    std::string entreprise = (const char*)sqlite3_column_text(stmt,4);// ENTREPRISE
+    std::string mail = (const char*)sqlite3_column_text(stmt,9);// MAIL
 
-    printf("\nRue: %d %s", sqlite3_column_int(stmt,5)); // Contient le numero
-    printf("\nComplement: %s", sqlite3_column_text(stmt,6));
-    printf("\nCP: %d ", sqlite3_column_int(stmt,7));
-    printf("\nville: %s",sqlite3_column_text(stmt,8));
-    Adresse A(sqlite3_column_int(stmt,5),sqlite3_column_text(stmt,6),sqlite3_column_int(stmt,7),sqlite3_column_text(stmt,8))
+    Pro B(sqlite3_column_int(stmt,0), // ID
+                            nom,        // NOM
+                            prenom,     // PRENOM
+                            sexe,       // SEXE
+                            A,           // ADRESSE
+                            entreprise, // ENTREPRISE
+                            mail);        // MAIL
 
-    printf("\nDate de naissance %d", sqlite3_column_int(stmt,9));
-
-
+    build_db.push_back(B);
     }
 
     sqlite3_finalize(stmt);
 
-    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance WHERE entreprise IS NULL", ,-1,&stmt, NULL);
+    rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance WHERE entreprise IS NULL",-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
-    printf("ID: %d", sqlite3_column_int(stmt,0));
+    std::string rue = (const char*)sqlite3_column_text(stmt,4);
+    std::string complement = (const char*)sqlite3_column_text(stmt,5);
+    std::string ville = (const char*)sqlite3_column_text(stmt,7);
 
-    printf("\nNom: %s %s", sqlite3_column_text(stmt,1));
-    printf("\nPrenom: %s", sqlite3_column_text(stmt,2));
+    std::string nom = (const char*)sqlite3_column_text(stmt,1);// NOM
+    std::string prenom = (const char*)sqlite3_column_text(stmt,2);// PRENOM
+    std::string sexe = (const char*)sqlite3_column_text(stmt,3);// SEXE
+    std::string dateNaissance = (const char*)sqlite3_column_text(stmt,8);// DATE NAISSANCE
 
-    printf("\nSexe: %s", sqlite3_column_text(stmt,3));
-    printf("\nRue: %d %s", sqlite3_column_int(stmt,5)); // Contient le numero
-    printf("\nComplement: %s", sqlite3_column_text(stmt,6));
-    printf("\nCP: %d ", sqlite3_column_int(stmt,7));
+    Adresse A(rue,complement,sqlite3_column_int(stmt,6),ville);
+    Private C(sqlite3_column_int(stmt,0),   // ID
+                            nom,            // NOM
+                            prenom,         // PRENOM
+                            sexe,           // SEXE
+                            A,               // ADRESSE
+                            dateNaissance);// DATE NAISSANCE
+    uild_db.push_back(C);
     }
     sqlite3_finalize(stmt);
 
-
+    return build_db;
 }
 /*
 IdContact        integer primary key autoincrement not null,

@@ -3,23 +3,15 @@
 
 Private::~Private(){}
 
-Private::Private(int id, string nom, string prenom, string sexe, Adresse adresse,int day, int month, int year)
+Private::Private(int id, string nom, string prenom, string sexe, Adresse adresse,string dateNaissance)
 :Contact(id, nom, prenom, sexe, adresse){
-       this->dateNaissance=ddn(day, month, year);
+       this->dateNaissance=dateNaissance;
 }
 
-string Private::Getddn(){
-    ddn dateNaissance=this->dateNaissance;
-    string day = to_string(dateNaissance.day);
-    string month = to_string(dateNaissance.month);
-    string year = to_string(dateNaissance.year);
-    string ddn = day+"/"+month+"/"+year;
-    return ddn;
-}
 
 string Private::affiche(){
     ostringstream oss;
     oss << Contact::affiche();
-    oss <<"Date de naissance: "<< this->Getddn()<<endl;
+    oss <<"Date de naissance: "<< this->dateNaissance<<endl;
     return oss.str();
 }
