@@ -107,7 +107,7 @@ std::vector<Contact> build_from_database(sqlite3* db){
                             sexe,           // SEXE
                             A,               // ADRESSE
                             dateNaissance);// DATE NAISSANCE
-    uild_db.push_back(C);
+    build_db.push_back(C);
     }
     sqlite3_finalize(stmt);
 

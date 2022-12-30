@@ -94,7 +94,7 @@ void test1(){
     string entreprise = "APPLE";
     string mail = "totolucas@hotmail.com";
 
-    ddn date(10,10,10);
+    //ddn date(10,10,10);
     Adresse A("50, toto","tata",34000,"Montpellier");
     //A.affiche();
 
@@ -109,7 +109,7 @@ void test1(){
     cout << "--------------------------------" << endl;
 
     cout << "--------------------------------" << endl;
-    Private totoLucas2(10,nom2,prenom2,"M",A,10,10,10);
+    Private totoLucas2(10,nom2,prenom2,"M",A,"10,10,10");
     cout << totoLucas2.affiche();
     cout << "--------------------------------" << endl;
 }
