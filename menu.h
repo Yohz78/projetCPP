@@ -83,7 +83,7 @@ void menu(){
 
         //Saisie si le contact est un professionnel
         if(choix.compare("pro")==0){
-            int id, numero, codepostal;
+            int id, codepostal;
             string nom, prenom, nomEntreprise, rue, email, complement, ville;
             string sexe;
 
@@ -117,9 +117,7 @@ void menu(){
 
             cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
             cin>>sexe;
-            cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
-            cin>>numero;
-            cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
+            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? H/F ? \n"<<endl;
             cin>>rue;
             cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
             cin>>complement;
@@ -127,13 +125,13 @@ void menu(){
             cin>>codepostal;
             cout<<"\n Quelle est la ville du contact ? \n"<<endl;
             cin>>ville;
-            Adresse adresse(numero,rue,complement,codepostal,ville);
+            Adresse adresse(rue,complement,codepostal,ville);
             Pro newPro(id,nom,prenom,sexe,adresse, nomEntreprise, email);
 
 
         //Saisie pour un contact privé
         }else if(choix.compare("private")==0){
-            int id, day, month, year, numero, codepostal;
+            int id, day, month, year, codepostal;
             string nom, prenom, rue, complement, ville;
             string sexe;
 
@@ -179,9 +177,7 @@ void menu(){
                 cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
                 cin>>sexe;
             }
-            cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
-            cin>>numero;
-            cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
+            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? H/F ? \n"<<endl;
             cin>>rue;
             cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
             cin>>complement;
@@ -190,7 +186,7 @@ void menu(){
             cout<<"\n Quelle est la ville du contact ? \n"<<endl;
             cin>>ville;
 
-            Adresse adresse(numero,rue,complement,codepostal,ville);
+            Adresse adresse(rue,complement,codepostal,ville);
             Private newPrivate(id,nom,prenom,sexe,adresse,day,month,year);
 
         }else{

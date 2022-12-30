@@ -26,15 +26,13 @@ struct Adresse{
         return oss.str();
     }
     Adresse(){};
-    Adresse(int numero,string rue,string complement,int codePostal,string ville){
-        this->numero = numero;
+    Adresse(string rue,string complement,int codePostal,string ville){
         this->rue = rue;
         this->complement = complement;
         this->codePostal = codePostal;
         this->ville = ville;
     }
-    void SetAdresse(int numero,string rue,string complement,int codePostal,string ville){
-        this->numero = numero;
+    void SetAdresse(string rue,string complement,int codePostal,string ville){
         this->rue = rue;
         this->complement = complement;
         this->codePostal = codePostal;

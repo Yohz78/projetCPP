@@ -13,10 +13,22 @@ using namespace std;
 int main()
 {
 
-    char test[50+1] = "15, rue des lilas";
-    char *ptr=NULL;
-    ptr = strtok(*test,',');
-    cout << ptr << endl;
+    char str[100]; // declare the size of string
+    cout << " Enter a string: " <<endl;
+    cin.getline(str, 100); // use getline() function to read a string from input stream
+
+    char *ptr; // declare a ptr pointer
+    ptr = strtok(str, " , "); // use strtok() function to separate string using comma (,) delimiter.
+    cout << " \n Split string using strtok() function: " << endl;
+    // use while loop to check ptr is not null
+    *str = str[strlen(ptr)+1];
+    printf("%s\n",str);
+    while (ptr != NULL)
+    {
+        cout << ptr  << endl; // print the string token
+        ptr = strtok (NULL, " , ");
+    }
+
 
     //menu();
 
@@ -83,7 +95,7 @@ void test1(){
     string mail = "totolucas@hotmail.com";
 
     ddn date(10,10,10);
-    Adresse A(50,"toto","tata",34000,"Montpellier");
+    Adresse A("50, toto","tata",34000,"Montpellier");
     //A.affiche();
 
     cout << "--------------------------------" << endl;

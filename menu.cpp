@@ -11,9 +11,10 @@
 
 
 
-void select(std::string requete){
-    sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
+void select(std::string requete,sqlite3 *db){
 
+    sqlite3_stmt *stmt = NULL;
+    int rc = sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
     printf("ID: %d", sqlite3_column_int(stmt,0));
@@ -31,6 +32,7 @@ vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER 
 
     vector<std::string> to_string;
     std::ostringstream oss;
+    sqlite3_stmt *stmt = NULL;
     sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
 
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
@@ -52,23 +54,22 @@ vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER 
 
 std::vector<Contact> build_from_database(){
     std::vector<Contact> build_db;
-
-    sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail WHERE entreprise IS NOT NULL", ,-1,&stmt, NULL);
+    sqlite3_stmt *stmt = NULL;
+    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail WHERE entreprise IS NOT NULL", ,-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
     printf("ID: %d", sqlite3_column_int(stmt,0));
 
     printf("\nNom: %s %s", sqlite3_column_text(stmt,1));
     printf("\nPrenom: %s", sqlite3_column_text(stmt,2));
-
     printf("\nSexe: %s", sqlite3_column_text(stmt,3));
-
     printf("\nEntreprise: %s", sqlite3_column_text(stmt,4));
 
     printf("\nRue: %d %s", sqlite3_column_int(stmt,5)); // Contient le numero
     printf("\nComplement: %s", sqlite3_column_text(stmt,6));
     printf("\nCP: %d ", sqlite3_column_int(stmt,7));
     printf("\nville: %s",sqlite3_column_text(stmt,8));
+    Adresse A(sqlite3_column_int(stmt,5),sqlite3_column_text(stmt,6),sqlite3_column_int(stmt,7),sqlite3_column_text(stmt,8))
 
     printf("\nDate de naissance %d", sqlite3_column_int(stmt,9));
 
@@ -77,9 +78,18 @@ std::vector<Contact> build_from_database(){
 
     sqlite3_finalize(stmt);
 
-    sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance WHERE entreprise IS NULL", ,-1,&stmt, NULL);
+    int rc = sqlite3_prepare_v2(db,"SELECT id,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance WHERE entreprise IS NULL", ,-1,&stmt, NULL);
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
 
+    printf("ID: %d", sqlite3_column_int(stmt,0));
+
+    printf("\nNom: %s %s", sqlite3_column_text(stmt,1));
+    printf("\nPrenom: %s", sqlite3_column_text(stmt,2));
+
+    printf("\nSexe: %s", sqlite3_column_text(stmt,3));
+    printf("\nRue: %d %s", sqlite3_column_int(stmt,5)); // Contient le numero
+    printf("\nComplement: %s", sqlite3_column_text(stmt,6));
+    printf("\nCP: %d ", sqlite3_column_int(stmt,7));
     }
     sqlite3_finalize(stmt);
 
