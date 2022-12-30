@@ -131,7 +131,7 @@ void menu(){
 
         //Saisie pour un contact privé
         }else if(choix.compare("private")==0){
-            int year, codepostal;
+            int year, codepostal,id;
             string nom, prenom, rue, complement, ville, datenaissance;
             string sexe;
 
