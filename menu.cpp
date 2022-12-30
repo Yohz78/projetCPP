@@ -11,12 +11,7 @@
 
 
 
-void select(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
-
-/*
-void liste(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
->>>>>>> 3c9744296cd8b987ee4b0111189902f9573723f4
-
+void select(string requete){
     sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
 
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
@@ -30,9 +25,7 @@ void liste(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE 
     printf("\nDate de naissance %d", sqlite3_column_int(stmt,9));
     printf("\n--------------------------------------\n");
     }
-    sqlite3_finalize(stmt);
-}
-<<<<<<< HEAD
+    sqlite3_finalize(stmt);} // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
 vector<std::string> select_to_string(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
