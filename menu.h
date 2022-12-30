@@ -131,8 +131,8 @@ void menu(){
 
         //Saisie pour un contact privé
         }else if(choix.compare("private")==0){
-            int id, day, month, year, codepostal;
-            string nom, prenom, rue, complement, ville;
+            int year, codepostal;
+            string nom, prenom, rue, complement, ville, datenaissance;
             string sexe;
 
             cout<<"Quel est l'id du contact ? \n"<<endl;
@@ -152,26 +152,9 @@ void menu(){
                 cin>>prenom;
             }
 
-            cout<<"\n Quel est l'année de naissance du contact? \n"<<endl;
-            cin>>year;
-            while(year<1900||year>2020){
-                cout<<"Merci de saisir une année comprise entre 1900 et 2020"<<endl;
-                cin>>year;
-            }
+            cout<<"\n Merci de saisir la date de naissance du contact \n"<<endl;
+            cin>>datenaissance;
 
-            cout<<"\n Quel est le mois de naissance du contact (format aa/mm/yyyy) ? \n"<<endl;
-            cin>>month;
-            while(month<1||month>12){
-                cout<<"Merci de saisir un chiffre entre 1 et 12"<<endl;
-                cin>>month;
-            }
-
-            cout<<"\n Quel est le jour de naissance du contact (format aa/mm/yyyy) ?\n"<<endl;
-            cin>>day;
-            while(day<1||day>31){
-                cout<<"Merci de saisir un chiffre entre 1 et 31"<<endl;
-                cin>>day;
-            }
 
             while(sexe.compare("H")!=0||sexe.compare("H")!=0){
                 cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
@@ -187,7 +170,7 @@ void menu(){
             cin>>ville;
 
             Adresse adresse(rue,complement,codepostal,ville);
-            Private newPrivate(id,nom,prenom,sexe,adresse,day,month,year);
+            Private newPrivate(id,nom,prenom,sexe,adresse,datenaissance);
 
         }else{
             cout<<"Saisie incorrecte. Retour au menu.\n"<<endl;
