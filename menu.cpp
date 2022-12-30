@@ -11,7 +11,7 @@
 
 
 
-void select(string requete){
+void select(std::string requete){
     sqlite3_prepare_v2(db,requete,-1,&stmt, NULL);
 
     while ( (rc = sqlite3_step(stmt)) == SQLITE_ROW){
@@ -27,7 +27,7 @@ void select(string requete){
     }
     sqlite3_finalize(stmt);} // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
-vector<std::string> select_to_string(string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
+vector<std::string> select_to_string(std::string requete){ // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
 
     vector<std::string> to_string;
     std::ostringstream oss;
