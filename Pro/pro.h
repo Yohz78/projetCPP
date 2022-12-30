@@ -9,7 +9,7 @@ class Pro: public Contact
 
     public:
 
-    Pro(int,string,string,char,Adresse,string, string);
+    Pro(int,string,string,string,Adresse,string, string);
     virtual~Pro();
 
     void SetnomEntreprise(string n){this->nomEntreprise=n;}

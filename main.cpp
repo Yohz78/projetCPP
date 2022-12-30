@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 #include "contact/contact.h"
 #include "Private/private.h"
@@ -12,8 +13,11 @@ using namespace std;
 int main()
 {
 
-    string test = "15, rue des lilas";
+    char test[50+1] = "15, rue des lilas";
     char *ptr=NULL;
+    ptr = strtok(*test,',');
+    cout << ptr << endl;
+
     //menu();
 
     //databaseHandler bdd("dbContacts.db");
@@ -83,17 +87,17 @@ void test1(){
     //A.affiche();
 
     cout << "--------------------------------" << endl;
-    Contact Lucas(10,nom1,prenom1,'M',A);
+    Contact Lucas(10,nom1,prenom1,"M",A);
     cout << Lucas.affiche();
     cout << "--------------------------------" << endl;
 
     cout << "--------------------------------" << endl;
-    Pro totoLucas(10,nom2,prenom2,'M',A,entreprise,mail);
+    Pro totoLucas(10,nom2,prenom2,"M",A,entreprise,mail);
     cout << totoLucas.affiche();
     cout << "--------------------------------" << endl;
 
     cout << "--------------------------------" << endl;
-    Private totoLucas2(10,nom2,prenom2,'M',A,10,10,10);
+    Private totoLucas2(10,nom2,prenom2,"M",A,10,10,10);
     cout << totoLucas2.affiche();
     cout << "--------------------------------" << endl;
 }

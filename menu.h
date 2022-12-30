@@ -6,6 +6,9 @@
 #include <cstring>
 #include<regex>
 #include<stdio.h>
+#include "contact/contact.h"
+#include "Private/private.h"
+#include "Pro/pro.h"
 
 using namespace std;
 
@@ -83,7 +86,7 @@ void menu(){
             int id, numero, codepostal;
             string nom, prenom, nomEntreprise, rue, email, complement, ville;
             char sexe;
-            Adresse adresse;
+
             cout<<"Quel est l'id du contact ? \n"<<endl;
             cin>>id;
             cout<<"\n Quel est le nom du contact ? \n"<<endl;
@@ -117,7 +120,7 @@ void menu(){
             cout<<"\n Quel est le numéro de la rue du contact ? H/F ? \n"<<endl;
             cin>>numero;
             cout<<"\n Quel est la rue du contact ? H/F ? \n"<<endl;
-            cin>>numero;
+            cin>>rue;
             cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
             cin>>complement;
             cout<<"\n Quel est le code postal du contact ? \n"<<endl;
@@ -131,7 +134,6 @@ void menu(){
             int id, day, month, year, numero, codepostal;
             string nom, prenom, rue, complement, ville;
             string sexe;
-            Adresse adresse;
 
             cout<<"Quel est l'id du contact ? \n"<<endl;
             cin>>id;
@@ -185,6 +187,9 @@ void menu(){
             cin>>codepostal;
             cout<<"\n Quelle est la ville du contact ? \n"<<endl;
             cin>>ville;
+
+            Adresse adresse(numero,rue,complement,codepostal,ville);
+            Private newPrivate(id,nom,prenom,sexe,adresse,day,month,year);
 
         }else{
             cout<<"Saisie incorrecte. Retour au menu.\n"<<endl;
