@@ -17,12 +17,14 @@ class app
         void init();
         void run();
         void affiche();
+        void user();
 
 
 
     private:
         sqlite3 *db;
         std::vector<Contact> p;
+
 };
 
 #endif // APP_H

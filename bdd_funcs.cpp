@@ -29,7 +29,8 @@ void select_db(char* requete,sqlite3 *db){
     printf("\nEntreprise: %s", sqlite3_column_text(stmt,4));
     printf("\nRue: %d %s", sqlite3_column_int(stmt,5), sqlite3_column_text(stmt,6));
     printf("\nCP: %d ville: %s", sqlite3_column_int(stmt,7), sqlite3_column_text(stmt,8));
-    printf("\nDate de naissance %d", sqlite3_column_int(stmt,9));
+    printf("\nMail %s", sqlite3_column_text(stmt,9));
+    printf("\nDate de naissance %s", sqlite3_column_text(stmt,10));
     printf("\n--------------------------------------\n");
     }
     sqlite3_finalize(stmt);} // PENSEZ A VERIFIER QUE SI LE CHAMP EST NULL ON NE L AFFICHE PAS
@@ -147,7 +148,7 @@ void insert_contact_pro(sqlite3 *db, Pro *p){
         exit(0);
     }
 
-    int IdContact = p->GetIdentifiant();
+    //int IdContact = p->GetIdentifiant();
     const char* nom = p->GetNom().c_str();
     const char* prenom = p->GetPrenom().c_str();
     const char* sexe = p->GetSexe().c_str();
@@ -159,7 +160,7 @@ void insert_contact_pro(sqlite3 *db, Pro *p){
     const char* mail = p->Getaddmail().c_str();
 
     /* Bind the values to the placeholders */
-    sqlite3_bind_int(stmt, 1, IdContact);
+    sqlite3_bind_null(stmt, 1);
     sqlite3_bind_text(stmt, 2,nom , -1, NULL);
     sqlite3_bind_text(stmt, 3,prenom , -1, NULL);
     sqlite3_bind_text(stmt, 4,sexe , -1, NULL);
@@ -196,7 +197,7 @@ void insert_contact_private(sqlite3 *db, Private *p){
         exit(0);
     }
 
-    int IdContact = p->GetIdentifiant();
+    //int IdContact = p->GetIdentifiant();
     const char* nom = p->GetNom().c_str();
     const char* prenom = p->GetPrenom().c_str();
     const char* sexe = p->GetSexe().c_str();
@@ -207,7 +208,7 @@ void insert_contact_private(sqlite3 *db, Private *p){
     const char* ddn = p->Getddn().c_str();
 
     /* Bind the values to the placeholders */
-    sqlite3_bind_int(stmt, 1, IdContact);
+    sqlite3_bind_null(stmt, 1);
     sqlite3_bind_text(stmt, 2,nom , -1, NULL);
     sqlite3_bind_text(stmt, 3,prenom , -1, NULL);
     sqlite3_bind_text(stmt, 4,sexe , -1, NULL);
@@ -232,7 +233,7 @@ void insert_contact_private(sqlite3 *db, Private *p){
 
 void delete_from_database(int id,sqlite3 *db) {
 
-    char *sql = "DELETE FROM contacts WHERE id = ?";
+    char *sql = "DELETE FROM contacts WHERE idcontact = ?";
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {

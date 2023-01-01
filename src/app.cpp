@@ -34,9 +34,7 @@ void app::init()
 
 void app::run()
 {
-    while(1){
-        affiche();
-    }
+    user();
 }
 
 bool Email_check(string email)
@@ -45,8 +43,8 @@ bool Email_check(string email)
     return regex_match(email,pattern);
     }
 
-void app::affiche()
-{
+
+void app::affiche(){
 
 
     cout<<"***********************************\n"<<endl;
@@ -54,14 +52,19 @@ void app::affiche()
     cout<<"Que souhaitez vous faire ?\n"<< endl;
     cout<<"- Pour afficher la liste des contacts, tapez liste \n"<< endl;
     cout<<"- Pour afficher la liste des contacts professionnels, tapez pro\n"<< endl;
-    cout<<"- Pour afficher la liste des contacts privés, tapez private\n"<< endl;
+    cout<<"- Pour afficher la liste des contacts prives, tapez private\n"<< endl;
     cout<<"- Pour effectuer une recherche a l'aide du nom d'un contact, tapez nom\n"<< endl;
     cout<<"- Pour effectuer une recherche a l'aide de la ville d'un contact, tapez ville\n"<< endl;
     cout<<"- Pour ajouter un contact, tapez ajout \n"<< endl;
     cout<<"- Pour supprimer un contact, tapez supprimer \n"<< endl;
     cout<<"- Pour quitter, tapez q \n"<< endl;
     cout<<"- Entrez votre choix : "<<endl;
+}
 
+void app::user()
+{
+    while(1){
+    affiche();
     string opt;
     cin >> opt;
 
@@ -71,7 +74,6 @@ void app::affiche()
         cout<<"liste"<<endl;
         char* requete="SELECT * FROM contacts";
         select_db(requete,this->db);
-        return;
 
     }
 
@@ -80,7 +82,6 @@ void app::affiche()
         //Ajouter ici un appel vers la fonction listant tout les contacts pro  à partir de la base sqlite
         cout<<"pro"<<endl;
         select_db("SELECT* FROM contacts WHERE entreprise is NOT NULL",this->db);
-        return;
     }
 
     //Afficher la liste des contacts privés
@@ -88,7 +89,6 @@ void app::affiche()
         //Ajouter ici un appel vers la fonction listant tout les contacts privés  à partir de la base sqlite
         cout<<"private"<<endl;
         select_db("SELECT * FROM contacts WHERE entreprise is NULL",this->db);
-        return;
     }
 
     //Effectuer une recherche a l'aide du nom
@@ -99,7 +99,6 @@ void app::affiche()
         cin>>nom;
         //ajouter ici un appel vers la fonction recherchant un contact à partir de son nom
         search_by_name(nom.c_str(),this->db);
-        return;
     }
 
     //Effectuer une recherche a l'aide de la ville
@@ -110,7 +109,6 @@ void app::affiche()
         fflush(stdin);
         cin>>ville;
         search_by_city(ville.c_str(),this->db);
-        return;
     }
 
 
@@ -129,8 +127,6 @@ void app::affiche()
             string nom, prenom, nomEntreprise, rue, email, complement, ville;
             string sexe;
 
-            cout<<"Quel est l'id du contact ? \n"<<endl;
-            cin>>id;
             cout<<"\n Quel est le nom du contact ? \n"<<endl;
             cin>>nom;
             while(nom.length()>30){
@@ -164,9 +160,9 @@ void app::affiche()
             cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
             fflush(stdin);
             cin>>sexe;
-            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? H/F ? \n"<<endl;
+            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? \n"<<endl;
             fflush(stdin);
-            cin>>rue;
+            getline(cin,rue);
             cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
             fflush(stdin);
             cin>>complement;
@@ -185,13 +181,9 @@ void app::affiche()
 
         //Saisie pour un contact privé
         }else if(choix.compare("private")==0){
-            int year, codepostal,id;
+            int codepostal,id;
             string nom, prenom, rue, complement, ville, datenaissance;
             string sexe;
-
-            cout<<"Quel est l'id du contact ? \n"<<endl;
-            fflush(stdin);
-            cin>>id;
 
             cout<<"\n Quel est le nom du contact ? \n"<<endl;
             fflush(stdin);
@@ -216,14 +208,14 @@ void app::affiche()
             cin>>datenaissance;
 
 
-            while(sexe.compare("H")!=0||sexe.compare("H")!=0){
+            while(sexe.compare("H")!=0||sexe.compare("F")!=0){
                 cout<<"\n Quel est le sexe du contact ? H/F ? \n"<<endl;
                 fflush(stdin);
                 cin>>sexe;
             }
-            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? H/F ? \n"<<endl;
+            cout<<"\n Quel est le numero et la rue du contact (format: numero, rue) ? \n"<<endl;
             fflush(stdin);
-            cin>>rue;
+            getline(cin,rue);
 
             cout<<"\n Quel est le complèment de l'adresse du contact ? indiquez na si non applicable. \n"<<endl;
             fflush(stdin);
@@ -244,9 +236,8 @@ void app::affiche()
 
         }else{
             cout<<"Saisie incorrecte. Retour au menu.\n"<<endl;
-            return;
         }
-
+        }
         //Supprimer un contact
         if(opt.compare("supprimer")==0){
         int ID;
@@ -257,14 +248,11 @@ void app::affiche()
         //ajouter ici un appel vers la fonction permettant de supprimer un contact à partir de son nom
         delete_from_database(ID,this->db);
         }
-
         //Quitter
         if(opt.compare("q")==0){
             sqlite3_close(this->db);
-            exit(0);
+            break;
         }
-        return;
-
     }
 }
 
