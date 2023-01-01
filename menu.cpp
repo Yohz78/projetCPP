@@ -313,7 +313,6 @@ void search_by_city(const char *city) {
     }
 
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
 }
 
 void search_by_name(const char *nom) {
@@ -358,6 +357,5 @@ void search_by_name(const char *nom) {
     }
 
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
 }
 
