@@ -4,17 +4,20 @@
 #include "contact/contact.h"
 #include "Private/private.h"
 #include "Pro/pro.h"
-#include "menu.h"
-#include "menu.cpp"
-#include "databaseHandler/databaseHandler.h"
-
+#include "bdd_funcs.h"
+#include "app.h"
 
 using namespace std;
 
 int main()
 {
 
-    sqlite3 *db = NULL;
+    app A;
+    A.init();
+
+    A.run();
+
+    /*sqlite3 *db = NULL;
     char zErrMsg='0';
     int rc = (sqlite3_open("dbContacts.db",&db));
     if(rc != SQLITE_OK){
@@ -42,7 +45,7 @@ int main()
         cout << build_db[i].affiche() << endl;
     }
 
-    sqlite3_close(db);
+    sqlite3_close(db);*/
 
     //menu();
 

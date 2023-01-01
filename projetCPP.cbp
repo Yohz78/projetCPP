@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -36,10 +38,13 @@
 		<Unit filename="Private/private.h" />
 		<Unit filename="Pro/pro.cpp" />
 		<Unit filename="Pro/pro.h" />
+		<Unit filename="bdd_funcs.cpp" />
+		<Unit filename="bdd_funcs.h" />
 		<Unit filename="contact/contact.cpp" />
 		<Unit filename="contact/contact.h" />
 		<Unit filename="databaseHandler/databaseHandler.cpp" />
 		<Unit filename="databaseHandler/databaseHandler.h" />
+		<Unit filename="include/app.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp">
 			<Option target="&lt;{~None~}&gt;" />
@@ -50,6 +55,7 @@
 		</Unit>
 		<Unit filename="sqlite3.h" />
 		<Unit filename="sqlite3ext.h" />
+		<Unit filename="src/app.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

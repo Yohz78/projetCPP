@@ -8,6 +8,7 @@
 #include "contact/contact.h"
 #include "Private/private.h"
 #include "Pro/pro.h"
+#include "bdd_funcs.h"
 
 // FAIRE DES FONCTIONS POUR MANIPULER LA BDD
 
@@ -132,10 +133,6 @@ IdContact        integer primary key autoincrement not null,
 */
 
 
-void insert_database(Contact *p){
-
-}
-
 void insert_contact_pro(sqlite3 *db, Pro *p){
     sqlite3_stmt *stmt;
     int rc;
@@ -233,20 +230,11 @@ void insert_contact_private(sqlite3 *db, Private *p){
 
 }
 
-void delete_from_database(int id) {
-    sqlite3 *db;
-    int rc;
-
-    rc = sqlite3_open("database.db", &db);
-    if (rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
-        exit(0);
-    }
+void delete_from_database(int id,sqlite3 *db) {
 
     char *sql = "DELETE FROM contacts WHERE id = ?";
     sqlite3_stmt *stmt;
-    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
@@ -271,20 +259,11 @@ void delete_from_database(int id) {
 }
 
 
-void search_by_city(const char *city) {
-    sqlite3 *db;
-    int rc;
-
-    rc = sqlite3_open("database.db", &db);
-    if (rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
-        exit(0);
-    }
+void search_by_city(const char *city,sqlite3 *db) {
 
     char *sql = "SELECT * FROM contacts WHERE city = ?";
     sqlite3_stmt *stmt;
-    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
@@ -315,17 +294,9 @@ void search_by_city(const char *city) {
     sqlite3_finalize(stmt);
 }
 
-void search_by_name(const char *nom) {
-    sqlite3 *db;
-    int rc;
+void search_by_name(const char *nom,sqlite3 *db) {
 
-    rc = sqlite3_open("database.db", &db);
-    if (rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
-        exit(0);
-    }
-
+    int rc = sqlite3_open("database.db", &db);
     char *sql = "SELECT * FROM contacts WHERE nom = ?";
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
