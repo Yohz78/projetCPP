@@ -2,6 +2,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cstring>
 
 #include "sqlite3.h"
 #include "contact/contact.h"
@@ -132,6 +133,104 @@ IdContact        integer primary key autoincrement not null,
 
 
 void insert_database(Contact *p){
+
+}
+
+void insert_contact_pro(sqlite3 *db, Pro *p){
+    sqlite3_stmt *stmt;
+    int rc;
+
+    /* Create the SQL statement */
+    const char *sql = "INSERT INTO contacts (IdContact,nom,prenom,sexe,entreprise,rue,complement,cp,ville,mail) VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+    /* Prepare the statement */
+    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }
+
+    int IdContact = p->GetIdentifiant();
+    const char* nom = p->GetNom().c_str();
+    const char* prenom = p->GetPrenom().c_str();
+    const char* sexe = p->GetSexe().c_str();
+    const char* entreprise =p->GetnomEntreprise().c_str();
+    const char* rue = p->GetAdresse().GetRue().c_str();
+    const char* complement = p->GetAdresse().GetComplement().c_str();
+    int cp = p->GetAdresse().GetCodePostal();
+    const char* ville = p->GetAdresse().GetVille().c_str();
+    const char* mail = p->Getaddmail().c_str();
+
+    /* Bind the values to the placeholders */
+    sqlite3_bind_int(stmt, 1, IdContact);
+    sqlite3_bind_text(stmt, 2,nom , -1, NULL);
+    sqlite3_bind_text(stmt, 3,prenom , -1, NULL);
+    sqlite3_bind_text(stmt, 4,sexe , -1, NULL);
+    sqlite3_bind_text(stmt, 5,entreprise , -1, NULL);
+    sqlite3_bind_text(stmt, 6,rue , -1, NULL);
+    sqlite3_bind_text(stmt, 7,complement , -1, NULL);
+    sqlite3_bind_int(stmt, 8,cp );
+    sqlite3_bind_text(stmt, 9,ville , -1, NULL);
+    sqlite3_bind_text(stmt, 10,mail , -1, NULL);
+
+
+    /* Execute the statement */
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "Failed to insert object: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }
+
+    /* Clean up */
+    sqlite3_finalize(stmt);
+}
+
+void insert_contact_private(sqlite3 *db, Private *p){
+    sqlite3_stmt *stmt;
+    int rc;
+
+    /* Create the SQL statement */
+    const char *sql = "INSERT INTO contacts (IdContact,nom,prenom,sexe,rue,complement,cp,ville,dtnaissance) VALUES (?,?,?,?,?,?,?,?,?)";
+
+    /* Prepare the statement */
+    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }
+
+    int IdContact = p->GetIdentifiant();
+    const char* nom = p->GetNom().c_str();
+    const char* prenom = p->GetPrenom().c_str();
+    const char* sexe = p->GetSexe().c_str();
+    const char* rue = p->GetAdresse().GetRue().c_str();
+    const char* complement = p->GetAdresse().GetComplement().c_str();
+    int cp = p->GetAdresse().GetCodePostal();
+    const char* ville = p->GetAdresse().GetVille().c_str();
+    const char* ddn = p->Getddn().c_str();
+
+    /* Bind the values to the placeholders */
+    sqlite3_bind_int(stmt, 1, IdContact);
+    sqlite3_bind_text(stmt, 2,nom , -1, NULL);
+    sqlite3_bind_text(stmt, 3,prenom , -1, NULL);
+    sqlite3_bind_text(stmt, 4,sexe , -1, NULL);
+    sqlite3_bind_text(stmt, 5,rue , -1, NULL);
+    sqlite3_bind_text(stmt, 6,complement , -1, NULL);
+    sqlite3_bind_int(stmt, 7,cp );
+    sqlite3_bind_text(stmt, 8,ville , -1, NULL);
+    sqlite3_bind_text(stmt, 9,ddn , -1, NULL);
+
+
+    /* Execute the statement */
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "Failed to insert object: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }
+
+    /* Clean up */
+    sqlite3_finalize(stmt);
+
 }
 
 void delete_database(int id){

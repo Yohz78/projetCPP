@@ -9,7 +9,6 @@ using namespace std;
 
 // STRUCT ADRESSE
 struct Adresse{
-    int numero;
     string rue;
     string complement;
     int codePostal;
@@ -17,8 +16,7 @@ struct Adresse{
 
         string affiche(){
         ostringstream oss;
-        oss <<    "Num:"<< numero << "---" <<
-                  "Rue:"<< rue << "---"  <<
+        oss <<    "Rue:"<< rue << "---"  <<
                   "Cplt:"<< complement << "---" <<
                   "CP:"<< codePostal << "---" <<
                   "Ville:"<< ville
@@ -37,6 +35,22 @@ struct Adresse{
         this->complement = complement;
         this->codePostal = codePostal;
         this->ville = ville;
+    }
+
+    string GetRue() const {
+        return rue;
+    }
+
+    string GetComplement() const {
+        return complement;
+    }
+
+    int GetCodePostal() const {
+        return codePostal;
+    }
+
+    string GetVille() const {
+        return ville;
     }
 
 
@@ -70,10 +84,25 @@ class Contact {
 
 
         // ----------- GETTERS ---------- //
-        int GetIdentifiant(){return this->identifiant;}
-        string GetNom(){return this->nom;}
-        string GetPrenom(){return this->prenom;}
-        string GetSexe(){return this->sexe;}
+        int GetIdentifiant() const {
+            return identifiant;
+        }
+
+        string GetNom() const {
+            return nom;
+        }
+
+        string GetPrenom() const {
+            return prenom;
+        }
+
+        string GetSexe() const {
+            return sexe;
+        }
+
+        Adresse GetAdresse() const {
+            return adresse;
+        }
 
         // ----------- METHODS ---------- //
 

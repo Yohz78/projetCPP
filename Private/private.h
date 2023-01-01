@@ -11,7 +11,7 @@ class Private : public Contact
         virtual ~Private();
         Private(int,string,string,string,Adresse,string);
 
-        string Getddn();
+        string Getddn(){return dateNaissance;}
         string affiche();
 
     private:
