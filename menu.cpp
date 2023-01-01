@@ -270,3 +270,94 @@ void delete_from_database(int id) {
     sqlite3_finalize(stmt);
 }
 
+
+void search_by_city(const char *city) {
+    sqlite3 *db;
+    int rc;
+
+    rc = sqlite3_open("database.db", &db);
+    if (rc) {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    char *sql = "SELECT * FROM contacts WHERE city = ?";
+    sqlite3_stmt *stmt;
+    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    rc = sqlite3_bind_text(stmt, 1, city, -1, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        int id = sqlite3_column_int(stmt, 0);
+        const char *name = (const char *)sqlite3_column_text(stmt, 1);
+        const char *city = (const char *)sqlite3_column_text(stmt, 4);
+
+        printf("ID: %d, Name: %s, City: %s\n", id, name, city);
+    }
+
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+}
+
+void search_by_name(const char *nom) {
+    sqlite3 *db;
+    int rc;
+
+    rc = sqlite3_open("database.db", &db);
+    if (rc) {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    char *sql = "SELECT * FROM contacts WHERE nom = ?";
+    sqlite3_stmt *stmt;
+    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    rc = sqlite3_bind_text(stmt, 1, nom, -1, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        int id = sqlite3_column_int(stmt, 0);
+        const char *name = (const char *)sqlite3_column_text(stmt, 1);
+        const char *city = (const char *)sqlite3_column_text(stmt, 4);
+
+        printf("ID: %d, Name: %s, City: %s\n", id, name, city);
+    }
+
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(0);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+}
+
