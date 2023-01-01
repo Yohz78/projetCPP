@@ -84,25 +84,11 @@ class Contact {
 
 
         // ----------- GETTERS ---------- //
-        int GetIdentifiant() const {
-            return identifiant;
-        }
-
-        string GetNom() const {
-            return nom;
-        }
-
-        string GetPrenom() const {
-            return prenom;
-        }
-
-        string GetSexe() const {
-            return sexe;
-        }
-
-        Adresse GetAdresse() const {
-            return adresse;
-        }
+        int GetIdentifiant() const {return identifiant;}
+        string GetNom() const {return nom;}
+        string GetPrenom() const {return prenom;}
+        string GetSexe() const {return sexe;}
+        Adresse GetAdresse() const {return adresse;}
 
         // ----------- METHODS ---------- //
 
