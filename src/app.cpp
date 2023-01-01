@@ -55,8 +55,8 @@ void app::affiche()
     cout<<"- Pour afficher la liste des contacts, tapez liste \n"<< endl;
     cout<<"- Pour afficher la liste des contacts professionnels, tapez pro\n"<< endl;
     cout<<"- Pour afficher la liste des contacts privés, tapez private\n"<< endl;
-    cout<<"- Pour effectuer une recherche à l'aide du nom d'un contact, tapez nom\n"<< endl;
-    cout<<"- Pour effectuer une recherche à l'aide de la ville d'un contact, tapez ville\n"<< endl;
+    cout<<"- Pour effectuer une recherche a l'aide du nom d'un contact, tapez nom\n"<< endl;
+    cout<<"- Pour effectuer une recherche a l'aide de la ville d'un contact, tapez ville\n"<< endl;
     cout<<"- Pour ajouter un contact, tapez ajout \n"<< endl;
     cout<<"- Pour supprimer un contact, tapez supprimer \n"<< endl;
     cout<<"- Pour quitter, tapez q \n"<< endl;
@@ -94,7 +94,7 @@ void app::affiche()
     //Effectuer une recherche a l'aide du nom
     if(opt.compare("nom")==0){
         string nom;
-        cout<<"\nMerci de saisir le nom du contact recherché : "<<endl;
+        cout<<"\nMerci de saisir le nom du contact recherche : "<<endl;
         fflush(stdin);
         cin>>nom;
         //ajouter ici un appel vers la fonction recherchant un contact à partir de son nom
@@ -106,7 +106,7 @@ void app::affiche()
     if(opt.compare("ville")==0){
         //ajouter ici un appel vers la fonction recherchant des contacts à partir de leur ville
         string ville;
-        cout<<"\nMerci de saisir la ville recherchée : "<<endl;
+        cout<<"\nMerci de saisir la ville recherchee : "<<endl;
         fflush(stdin);
         cin>>ville;
         search_by_city(ville.c_str(),this->db);

@@ -261,7 +261,7 @@ void delete_from_database(int id,sqlite3 *db) {
 
 void search_by_city(const char *city,sqlite3 *db) {
 
-    char *sql = "SELECT * FROM contacts WHERE city = ?";
+    char *sql = "SELECT * FROM contacts WHERE ville = ?";
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
@@ -279,10 +279,11 @@ void search_by_city(const char *city,sqlite3 *db) {
 
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
         int id = sqlite3_column_int(stmt, 0);
-        const char *name = (const char *)sqlite3_column_text(stmt, 1);
-        const char *city = (const char *)sqlite3_column_text(stmt, 4);
+        const char *nom = (const char *)sqlite3_column_text(stmt, 1);
+        const char *prenom= (const char *)sqlite3_column_text(stmt, 2);
+        const char *city = (const char *)sqlite3_column_text(stmt, 8);
 
-        printf("ID: %d, Name: %s, City: %s\n", id, name, city);
+         printf("ID: %d, NOM: %s, PRENOM: %s, City: %s\n", id, nom, prenom, city);
     }
 
     if (rc != SQLITE_DONE) {
@@ -296,10 +297,9 @@ void search_by_city(const char *city,sqlite3 *db) {
 
 void search_by_name(const char *nom,sqlite3 *db) {
 
-    int rc = sqlite3_open("database.db", &db);
     char *sql = "SELECT * FROM contacts WHERE nom = ?";
     sqlite3_stmt *stmt;
-    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
@@ -315,10 +315,11 @@ void search_by_name(const char *nom,sqlite3 *db) {
 
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
         int id = sqlite3_column_int(stmt, 0);
-        const char *name = (const char *)sqlite3_column_text(stmt, 1);
-        const char *city = (const char *)sqlite3_column_text(stmt, 4);
+        const char *nom = (const char *)sqlite3_column_text(stmt, 1);
+        const char *prenom= (const char *)sqlite3_column_text(stmt, 2);
+        const char *city = (const char *)sqlite3_column_text(stmt, 8);
 
-        printf("ID: %d, Name: %s, City: %s\n", id, name, city);
+        printf("ID: %d, NOM: %s, PRENOM: %s, City: %s\n", id, nom, prenom, city);
     }
 
     if (rc != SQLITE_DONE) {
